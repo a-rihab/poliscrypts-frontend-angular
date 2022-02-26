@@ -22,4 +22,11 @@ export class AuthenticateService {
     }
     return this.http.post(AUTH_API + '/login', loginRequest, httpOptions);
   }
+
+  refreshToken(token: string) {
+    return this.http.post(AUTH_API + 'refreshtoken', {
+      refreshToken: token
+    }, httpOptions);
+  }
+  
 }
