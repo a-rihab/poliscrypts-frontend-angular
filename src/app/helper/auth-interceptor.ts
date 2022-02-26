@@ -16,7 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
     constructor(private tokenService: TokenStorageService, private authService: AuthenticateService) {}
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<Object>> {
-        
+
         let authReq = req;
 
         const token = this.tokenService.getToken();
@@ -42,7 +42,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 return this.authService.refreshToken(refreshToken).pipe(
                     switchMap((token: any) => {
                         this.isRefreshing = false;
-                        this.tokenService.saveToken(token.accessToken);
+                        this.tokenService.saveLoginResponse(token);
                         this.refreshTokenSubject.next(token.accessToken);
 
                         return next.handle(this.addTokenHeader(request, token.accessToken));
