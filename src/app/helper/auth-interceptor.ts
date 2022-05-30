@@ -31,6 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
             }
             return throwError(() => new Error(error));
         }));
+      
     }
 
     private handle401Error(request: HttpRequest<any>, next: HttpHandler) {
